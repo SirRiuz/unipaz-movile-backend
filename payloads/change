@@ -1,0 +1,14 @@
+POST /oiddas/ui/oracle/ldap/das/mypage/AppChgPwdMyPage HTTP/1.1
+Host: unipazsso.uxxi.com
+Content-Length: 90
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: http://unipazsso.uxxi.com
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://unipazsso.uxxi.com/oiddas/ui/oracle/ldap/das/mypage/AppChgPwdMyPage?doneURL=http://unipaz.uxxi.com/portal/page/portal/uxxiportal/inicio
+Accept-Encoding: gzip, deflate
+Accept-Language: es-419,es;q=0.9
+
+

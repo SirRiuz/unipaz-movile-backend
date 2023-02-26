@@ -1,0 +1,15 @@
+POST /pls/orasso/orasso.wwsso_app_admin.ls_login HTTP/1.1
+Host: unipazsso.uxxi.com
+Content-Length: 542
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: http://unipaz.uxxi.com
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://unipaz.uxxi.com/
+Accept-Encoding: gzip, deflate
+Accept-Language: es-419,es;q=0.9
+Connection: close
+
+site2pstoretoken=v1.2%7E59076E25%7E59815768CE303485ECD932FED1CC60D61EDD780197402B33150F687D41867309684A13E181D638355A9E738BBBE4685588BAAE3A8269307A6E960776ED8B6E013A6692B9AE2FF9FAC3866AF3215558FB5EFDF5A20F45F48B5FEF8AC2E83FE53F7EC055FA6790B045867CBE9B4DAC5C45F2688805A504FB81C82CD2B888AF3EE36E954974CED4F50F293B75FFCF144A777F26914E1D215718A41EFE5D78A7C0E9C6B1EB011896457BBA81ABDDC1208734855C156E6F150DFFBEF7522BC4C4B3EE54078AC97378A67F3105AE2CF4CFF6A8E90750A3D0BE38344678ABDD5B19DAA9D4165EF2DFEA34D3&password=1193096338&ssousername=1193096338
