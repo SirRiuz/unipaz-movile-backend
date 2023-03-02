@@ -35,3 +35,6 @@ DATASET_DIR = 'data/dataset'
 # STORAGE
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
+
+
+JWT_SECRET_KEY = "ss"
