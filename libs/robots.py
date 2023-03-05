@@ -7,6 +7,12 @@ from libs.storage import Storage
 from bs4 import BeautifulSoup
 
 
+
+class BaseClient:
+    
+    def __init__(self, credentials) -> None:
+        self.credentials = credentials
+
 class Cliet:
 
     def __init__(self, config:Dict):

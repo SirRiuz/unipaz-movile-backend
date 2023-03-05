@@ -5,17 +5,14 @@ import datetime
 from typing import Optional, List, Dict
 
 # libs
-from libs.robots import Cliet
+from libs.robots import Cliet, BaseClient
 from settings import URLS
 from helpers.calendar import to_format_date
 from modules.calendar.payloads import CALENDAR_BODY
 from modules.calendar.codes import *
 
 
-class Calendar:
-
-    def __init__(self, credentials):
-        self.credentials = credentials
+class Calendar(BaseClient):
 
     def options(self) -> list:
         """ Get the options for filter the data """
