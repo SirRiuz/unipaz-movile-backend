@@ -18,8 +18,14 @@ async def calendar(request:Request, response: Response, day:str = None,
         day=day,
         all=all
     )
+    if all:
+        return ({
+            "days": calendar.get_calendar_days(),
+            "data": filter_data,
+        })
 
     return ({"data": filter_data})
+
 
 @app.get("/calendar/days/")
 async def days(request:Request) -> Response:
