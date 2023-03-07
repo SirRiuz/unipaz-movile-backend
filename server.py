@@ -11,3 +11,4 @@ app.middleware("http")(token_middleware)
 # Views
 from modules.auth.views import *
 from modules.calendar.views import *
+from modules.user.views import *

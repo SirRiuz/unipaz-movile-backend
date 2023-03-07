@@ -53,6 +53,9 @@ class Cliet:
                 allow_redirects=self.config.get("redirect")
             )
         
+        if self.config.get("debug"):
+            open("response.html", "w").write(response.text)
+
         if response.status_code == 200:
             storage.set(REQUEST_HASH, response.text) 
             return response.text

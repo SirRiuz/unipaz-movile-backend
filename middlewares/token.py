@@ -17,7 +17,7 @@ async def token_middleware(request:Request, call_next):
 
     response = None
     TOKEN = request.headers.get("Authorization", "")\
-        .replace("token ", "")
+        .replace("Bearer ", "")
     try:
         DATA = jwt.decode(
             TOKEN, JWT_SECRET_KEY,
