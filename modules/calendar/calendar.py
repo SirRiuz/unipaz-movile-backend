@@ -14,7 +14,7 @@ from modules.calendar.codes import *
 
 class Calendar(BaseClient):
 
-    def options(self) -> list:
+    def options(self) -> (list):
         """ Get the options for filter the data """
         if self.credentials:
             OPTION_LIST = []
@@ -34,20 +34,43 @@ class Calendar(BaseClient):
 
             return OPTION_LIST
         
-    def get_calendar_days(self) -> List[Dict]:
+    def get_calendar_days(self) -> (List[Dict]):
         """ Get list of the week days """
         WEEKS_DAY = list(calendar.day_name)
-        TODAY_DAY = datetime.datetime.now().strftime('%A')
+        TODAY_DATA = datetime.datetime.now()
+        TODAY_DAY = TODAY_DATA.strftime('%A')
         day_list = []
-        for day in WEEKS_DAY:
-            day_list.append({
-                "name": day.lower(),
-                "is_today": day == TODAY_DAY
-            })
-        
-        return day_list
 
-    def get_class(self, option:Optional[str] = None) -> List[Dict]:
+        positive_day_count = 0
+        for positive_day in range(
+            WEEKS_DAY.index(TODAY_DAY),
+            len(WEEKS_DAY)
+        ):
+            DAY_NAME = WEEKS_DAY[positive_day]
+            day_list.append({
+                "name": DAY_NAME.lower(),
+                "day": (TODAY_DATA + datetime.timedelta(
+                    days=positive_day_count)
+                ).day,
+                "is_today": DAY_NAME == TODAY_DAY
+            })
+            positive_day_count += 1
+
+        negative_day_count = 0
+        for negative_day in range(WEEKS_DAY.index(TODAY_DAY), 0, -1):
+            DAY_NAME = WEEKS_DAY[negative_day_count]
+            day_list.append({
+                "name": DAY_NAME.lower(),
+                "day": (TODAY_DATA - datetime.timedelta(
+                    days=negative_day)
+                ).day,
+                "is_today": DAY_NAME == TODAY_DAY
+            })
+            negative_day_count += 1
+        
+        return sorted(day_list, key=lambda x: x["day"])
+
+    def get_class(self, option:Optional[str] = None) -> (List[Dict]):
         """ Get calendar data """
         if self.credentials:
             CLASS_LIST:list[dict] = []
