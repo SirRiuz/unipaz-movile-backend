@@ -12,18 +12,13 @@ SITE_TOKEN = r"v1.2%7E59076E25%7E59815768CE303485ECD932FED1CC60D61EDD780197402B3
 PAYLOAD_REQUEST = f"site2pstoretoken={SITE_TOKEN}&password=PASSWORD&ssousername=USER_NAME"
 PAYLOAD_CHANGE_REQUEST = f"oldpassword=USER&newpassword=PAYLOAD_PASSWORD&confpassword=PAYLOAD_PASSWORD&event=updatePassword"
 
-# The global password
-GLOBAL_PASSWORD = 'ThisIsAgootTroll121'
-
 
 # Payloas
 CHANGE_PAYLOAD = 'payloads/change'
 
-
 URLS = {
     'CALENDAR': 'http://unipaz.uxxi.com/portal/page/portal/uxxiportal/academico/horario',
     'CHANGE_PASSWORD': 'http://unipazsso.uxxi.com/oiddas/ui/oracle/ldap/das/mypage/AppChgPwdMyPage?doneURL=http://unipaz.uxxi.com/portal/page/portal/uxxiportal/inicio',
-    'GET_CHANGE_TOKEN': 'http://unipazsso.uxxi.com/oiddas/ui/oracle/ldap/das/mypage/AppChgPwdMyPage?doneURL=http://unipaz.uxxi.com/portal/page/portal/uxxiportal/inicio',
     'STUDENT_INFO': 'http://unipaz.uxxi.com/portal/page/portal/uxxiportal/academico/datos',
     'AUTH': 'http://unipazsso.uxxi.com/pls/orasso/orasso.wwsso_app_admin.ls_login'
 }
