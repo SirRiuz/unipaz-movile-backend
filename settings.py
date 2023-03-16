@@ -2,6 +2,7 @@
 
 NO_REQUIRE_AUTH = [
     "/auth/",
+    "/auth/refresh_token/",
     "auth/check/"
 ]
 
