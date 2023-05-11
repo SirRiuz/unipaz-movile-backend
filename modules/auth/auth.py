@@ -21,9 +21,15 @@ class Auth:
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             data=self.__get_body_request(),
             cookies=jar,
-            allow_redirects=False
+            #allow_redirects=False
         )
-        cookies = parse_cookies(response)
+        cookies = {}
+        for item in response.history:
+            cookies.update(parse_cookies(item))
+            #cookies = cookies + parse_cookies(item)
+            #print(item.headers.get("Set-Cookie"))
+
+
         if response.status_code == 500:
             raise Exception("Backend error ...")
 

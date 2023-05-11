@@ -13,3 +13,4 @@ from modules.auth.views import *
 from modules.calendar.views import *
 from modules.user.views import *
 from modules.todo.views import *
+from modules.califications.views import *
