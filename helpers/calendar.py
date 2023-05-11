@@ -18,6 +18,10 @@ def to_format_date(str_date:str) -> dict:
 
         CLASS_HOURS = (END_DATE.hour - START_DATE.hour)
         return {
+            "str_date": {
+                "start_class": DATA[0],
+                "end_class": DATA[1]
+            },
             "start_class": START_DATE.hour,
             "end_class": END_DATE.hour,
             "total_hours": f"{CLASS_HOURS}h",

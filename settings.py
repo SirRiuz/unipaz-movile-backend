@@ -2,6 +2,7 @@
 
 NO_REQUIRE_AUTH = [
     "/auth/",
+    "/auth/refresh_token/",
     "auth/check/"
 ]
 
@@ -17,6 +18,9 @@ PAYLOAD_CHANGE_REQUEST = f"oldpassword=USER&newpassword=PAYLOAD_PASSWORD&confpas
 CHANGE_PAYLOAD = 'payloads/change'
 
 URLS = {
+    'OLD_CALIFICATIONS': 'http://unipaz.uxxi.com/portal/page/portal/uxxiportal/academico/notas',
+    'MY_SIGNATURES': 'http://unipaz.uxxi.com/portal/page/portal/uxxiportal/academico/asignaturas',
+    'CALIFICATIONS_OPTIONS': 'http://unipaz.uxxi.com/portal/page/portal/uxxiportal/academico/Mis%20actas%20parciales',
     'CALENDAR': 'http://unipaz.uxxi.com/portal/page/portal/uxxiportal/academico/horario',
     'CHANGE_PASSWORD': 'http://unipazsso.uxxi.com/oiddas/ui/oracle/ldap/das/mypage/AppChgPwdMyPage?doneURL=http://unipaz.uxxi.com/portal/page/portal/uxxiportal/inicio',
     'STUDENT_INFO': 'http://unipaz.uxxi.com/portal/page/portal/uxxiportal/academico/datos',

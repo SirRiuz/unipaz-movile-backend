@@ -17,7 +17,7 @@ async def check(request:Request) -> Response:
     """ Check the jwt token and the cookies sesion """
     IS_VALID = False
     TOKEN = request.headers.get("Authorization", "")\
-        .replace("token ", "")
+        .replace("Bearer ", "")
     try:
         DATA = jwt.decode(
             TOKEN, JWT_SECRET_KEY,
@@ -32,6 +32,31 @@ async def check(request:Request) -> Response:
     return({"is_valid": IS_VALID})
 
 
+@app.post("/auth/refresh_token/")
+def refresh(request:Request, response:Response) -> Response:
+    TOKEN = request.headers.get("Authorization", "")\
+        .replace("Bearer ", "")    
+    try:
+        DATA = jwt.decode(
+            TOKEN, JWT_SECRET_KEY,
+            algorithms=["HS256"]
+        )
+        USER = DATA["user"]
+        PASSWORD = DATA["password"]
+        CREDENTIALS = Auth(USER, PASSWORD).login()
+        NEW_TOKEN = jwt.encode({
+            "credentials": json.dumps(CREDENTIALS),
+            "user": USER,
+            "password": PASSWORD
+        }, JWT_SECRET_KEY, algorithm="HS256")
+        
+        return ({"token": NEW_TOKEN})
+
+    except Exception as e:
+        response.status_code = 400
+        return ({"messege": "Error to refresh the token"})
+
+
 @app.post("/auth/")
 async def auth(data: dict, response:Response) -> Response:
     """ Get acces token of the user """
@@ -40,7 +65,9 @@ async def auth(data: dict, response:Response) -> Response:
     CREDENTIALS = Auth(USER, PASSWORD).login()
     if CREDENTIALS:
         TOKEN = jwt.encode({
-            "credentials": json.dumps(CREDENTIALS)
+            "credentials": json.dumps(CREDENTIALS),
+            "user": USER,
+            "password": PASSWORD
         }, JWT_SECRET_KEY, algorithm="HS256")
         return ({
             "token": TOKEN,
