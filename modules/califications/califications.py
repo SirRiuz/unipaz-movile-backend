@@ -5,6 +5,7 @@ import json
 # Libs
 from settings import URLS
 from libs.robots import Cliet, BaseClient
+from helpers.califications import get_future_califications
 from modules.califications.payloads import (
     CALENDAR_BODY,
     OLD_CALIFICATIONS
@@ -86,6 +87,8 @@ class Califications(BaseClient):
                             "isBadCalification": isBadCalification
                         })
                     DATA["califications"] = califications
+                    DATA["predictions"] = get_future_califications(
+                        califications)
                     CALIFICATION_DATA.append(DATA)
 
             return CALIFICATION_DATA
