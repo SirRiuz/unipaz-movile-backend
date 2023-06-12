@@ -73,9 +73,9 @@ class Calendar(BaseClient):
     def get_class(self, option:Optional[str] = None) -> (List[Dict]):
         """ Get calendar data """
         if self.credentials:
-            CLASS_LIST:list[dict] = []
+            CLASS_LIST = []
             BODY = CALENDAR_BODY.replace("%OPTION%" ,option) \
-                if option else None
+                if option else "vista=AI"
 
             data = Cliet({
                 "method": "post",
@@ -93,33 +93,54 @@ class Calendar(BaseClient):
             if not data:
                 return []
 
-            CALENDAR_DATA = data.find_all("table",{"class": "tabla"})
+            CALENDAR_DATA = data.find("table",{
+                "border": "1",
+                "cellspacing": "0",
+                "xmlns:estilos": "http://www.oracle.com/XSL/Transform/" \
+                    + "java/es.ocu.uxxi_general.util.propiedades.EstilosPortal"})
 
             if not CALENDAR_DATA:
-                return []
-            
-            CALENDAR_DATA = CALENDAR_DATA[1].find_all("tr")
-            
-            for item in CALENDAR_DATA:
-                k = 0
-                for calendar_items \
-                    in item.find_all("td", {"class": "PortletBodyColor"}):
-                    CALENDAR_SPAN_DATA = calendar_items.find_all("span")
-                    if len(CALENDAR_SPAN_DATA) > 0:
-                        # TODO : Solucionar error en calendario
-                        # salen clases en el dia domingo
-                        WEEK_DAY = list(calendar.day_name)\
-                            [k].lower()
-                        CLASS_LIST.append({
-                            "day": WEEK_DAY,
-                            "time":  to_format_date(
-                                item.find("td", {"class": "PortletHeaderColor"}
-                            ).text),
-                            "name": CALENDAR_SPAN_DATA[CLASS_NAME]\
-                                .text.capitalize(),
-                            "teacher": (CALENDAR_SPAN_DATA[TEACHER_NAME].text)\
-                                .replace("Prof.\u00a0", "").capitalize()
-                        })
-                    k += 1
+                return []            
 
-        return CLASS_LIST
+            day_index = 0
+            calendar_items = CALENDAR_DATA.find_all("td", {
+                "class": "PortletBodyColor"})
+            
+            for index, calendar_item in enumerate(calendar_items):
+                WEEK_DAY = list(calendar.day_name)[index]
+                if len(calendar_item) > 0:
+                    k = 0
+                    map_item = {}
+                    for el in calendar_item:
+                        if el.name != 'hr':
+                            map_item[k] = el.text.replace("\xa0", "")
+                            map_item['day'] = WEEK_DAY.lower()
+                            k += 1
+                        else:
+                            CLASS_LIST.append(map_item.copy())
+                            map_item.clear()
+                            k = 0
+            
+            result = []
+            for item in CLASS_LIST:
+                class_meta = item[CLASS_META].replace(" ", "")\
+                    .split("-")
+                class_code = class_meta[0]
+                class_name = item[CLASS_NAME].capitalize()
+                class_teacher = item[TEACHER_NAME]\
+                    .replace("Prof.", "").capitalize()
+                
+                class_time = item[TIME].replace("a", "-")
+
+                data = ({
+                    "code": class_code,
+                    "name": class_name,
+                    "teacher": class_teacher,
+                    "day": item["day"],
+                    "location": "...",
+                    "time": to_format_date(class_time)
+                })
+                
+                result.append(data)
+
+        return result

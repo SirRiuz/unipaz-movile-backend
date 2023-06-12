@@ -3,3 +3,5 @@ __pycache__
 response.html
 response
 .env
+*.html
+*.json
