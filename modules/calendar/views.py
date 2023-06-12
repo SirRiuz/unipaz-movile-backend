@@ -9,7 +9,7 @@ from modules.calendar.filter import Filter
 
 @app.get("/calendar/")
 async def calendar(request:Request, response: Response, day:str = None,
-                   all:bool = False) -> Response:
+                   all:bool = False) -> (Response):
     """ Get calendar data of the user """
     CREDENTIALS = request.state.credentials
     calendar = Calendar(CREDENTIALS)
@@ -26,16 +26,15 @@ async def calendar(request:Request, response: Response, day:str = None,
 
     return ({"data": filter_data})
 
-
 @app.get("/calendar/days/")
-async def days(request:Request) -> Response:
+async def days(request:Request) -> (Response):
     """ Get days of the week """
     CREDENTIALS = request.state.credentials
     calendar = Calendar(CREDENTIALS).get_calendar_days()
     return ({"data": calendar})
 
 @app.get("/calendar/options/")
-async def options(request:Request, day:str = None) -> Response:
+async def options(request:Request, day:str = None) -> (Response):
     """ Get options filter of calendar """
     CREDENTIALS = request.state.credentials
     calendar = Calendar(CREDENTIALS).options()
