@@ -36,4 +36,9 @@ DATASET_DIR = 'data/dataset'
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 
+# Database
+DATABASE_HOST = 'localhost'
+DATABASE_PORT = 27017
+
+
 JWT_SECRET_KEY = "ss"
