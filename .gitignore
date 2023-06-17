@@ -5,3 +5,4 @@ response
 .env
 *.html
 *.json
+scrap.py
