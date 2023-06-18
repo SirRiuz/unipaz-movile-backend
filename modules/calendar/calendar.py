@@ -10,7 +10,10 @@ from settings import URLS
 from helpers.calendar import to_format_date
 from modules.calendar.payloads import CALENDAR_BODY
 from modules.calendar.codes import *
+from libs.db import Database
 
+
+DB = Database().get_conection()
 
 class Calendar(BaseClient):
 
@@ -131,14 +134,26 @@ class Calendar(BaseClient):
                     .replace("Prof.", "").capitalize()
                 
                 class_time = item[TIME].replace("a", "-")
+                time = to_format_date(class_time)
+                day_name = "nigth" if time["hour_type"].lower() \
+                    == "pm" else "day"
+                
+                location = DB.calendar.find_one({
+                    "code": class_code})
+                
+                if location:
+                    location = ({
+                        "room": location["room"],
+                        "loc": location.get("location")
+                    })
 
                 data = ({
                     "code": class_code,
                     "name": class_name,
                     "teacher": class_teacher,
                     "day": item["day"],
-                    "location": "...",
-                    "time": to_format_date(class_time)
+                    "location": location,
+                    "time": time
                 })
                 
                 result.append(data)
