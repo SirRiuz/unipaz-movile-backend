@@ -10,8 +10,9 @@ from fastapi import Request, Response
 @app.get("/tasks/{todo_id}/")
 @app.get("/tasks/")
 @app.post("/tasks/")
-async def tasks(request:Request, respnse:Response,
-                data:dict = {}, todo_id:str = None) -> (Response):
+async def tasks(
+    request: Request, respnse: Response, data: dict = {}, todo_id: str = None
+) -> (Response):
     CREDENTIALS = request.state.credentials
     user_data = User(CREDENTIALS).get_info()
     USER_ID = user_data[0]
@@ -19,19 +20,21 @@ async def tasks(request:Request, respnse:Response,
     if request.method == "GET":
         todos = Todo(USER_ID).get(todo_id)
         if todos or not todo_id:
-            return ({"data": todos})
+            return {"data": todos}
         respnse.status_code = 404
-        return ({"messege": "Task not found"})
+        return {"messege": "Task not found"}
 
     if request.method == "DELETE":
         Todo(USER_ID).delete(todo_id)
-        return ({"messege": "Task deleted!"})
-    
+        return {"messege": "Task deleted!"}
+
     if request.method == "POST":
-        return({
-            "data": Todo(USER_ID).create({
-                "user": USER_ID,
-                "notes": data.get("notes", ""),
-                "title": data.get("title", ""),
-            })
-        })
+        return {
+            "data": Todo(USER_ID).create(
+                {
+                    "user": USER_ID,
+                    "notes": data.get("notes", ""),
+                    "title": data.get("title", ""),
+                }
+            )
+        }
