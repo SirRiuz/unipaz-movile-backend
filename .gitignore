@@ -6,3 +6,6 @@ response
 *.html
 *.json
 scrap.py
+db.sqlite3
+__pycache__/*
+migrations/*
