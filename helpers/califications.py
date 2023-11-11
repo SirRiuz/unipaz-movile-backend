@@ -59,7 +59,7 @@ def get_future_califications(califications: list) -> (list):
         end_court = (
             (3.0 - cal[0] * porcentajes[0]) - cal[1] * porcentajes[1]
         ) / porcentajes[2]
-        end_court = round(end_court, 2)
+        end_court = round(end_court, 1)
 
         for index in range(0, 2):
             data.append(
